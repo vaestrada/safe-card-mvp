@@ -42,11 +42,24 @@ for i in range(48):  # up to ~8 min
     time.sleep(10)
     st = fetch(f"https://generativelanguage.googleapis.com/v1beta/interactions/{iid}")
     done = st.get("status") in ("completed", "done", "COMPLETED", "error", "ERROR")
-    for step in st.get("steps", []) or st.get("interaction", {}).get("steps", []):
-        if step.get("type") == "model_output":
-            for part in step.get("content", {}).get("parts", []):
-                if part.get("mimeType", "").startswith("video") and part.get("data"):
-                    video_b64 = part["data"]
+    # Walk steps recursively: parts use snake_case (mime_type, data), not camelCase.
+    def find_video(x):
+        if isinstance(x, dict):
+            mt = x.get("mime_type") or x.get("mimeType") or ""
+            if str(mt).startswith("video") and x.get("data"):
+                return x["data"]
+            for v in x.values():
+                r = find_video(v)
+                if r:
+                    return r
+        elif isinstance(x, list):
+            for v in x:
+                r = find_video(v)
+                if r:
+                    return r
+        return None
+    if not video_b64:
+        video_b64 = find_video(st)
     if done or video_b64:
         print("STATUS:", st.get("status"), "VIDEO:", bool(video_b64))
         break

@@ -40,11 +40,21 @@ export default async function Home() {
             Basahin ang kuwento
           </Link>
         </div>
-        <img
-          src="/assets/og.png"
-          alt="Isang kasambahay na nakatingin sa kanyang cellphone, may pag-asa"
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/assets/og.png"
+          aria-label="Isang kasambahay na nakatingin sa kanyang cellphone, may pag-asa"
           className="mx-auto mt-8 w-full max-w-2xl rounded-xl border border-safe-line shadow-sm"
-        />
+        >
+          <source src="/assets/hero.mp4" type="video/mp4" />
+          <img
+            src="/assets/og.png"
+            alt="Isang kasambahay na nakatingin sa kanyang cellphone, may pag-asa"
+          />
+        </video>
       </section>
 
       {/* Benefits */}
