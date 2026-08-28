@@ -33,6 +33,12 @@ only), then apply the schema:
 supabase db push        # or run supabase/migrations/0001_init.sql in SQL editor
 ```
 
+**Key quirk (verified 2026-08-28):** on this project, PostgREST rejects the
+new-style `sb_secret_`/`sb_publishable_` API keys with "Invalid API key" but
+accepts the legacy `anon`/`service_role` keys. Use the legacy keys in
+`.env.local` (`supabase projects api-keys --project-ref <ref> --output json`,
+entries with `"type": "legacy"`).
+
 ## Epics
 
 | Epic | Capability | Where |

@@ -13,7 +13,12 @@ export async function GET(
   const { code } = await context.params;
   const source = request.nextUrl.searchParams.get("source") === "qr" ? "qr" : "link";
 
-  await recordReferral(code, source, request.nextUrl.pathname);
+  try {
+    await recordReferral(code, source, request.nextUrl.pathname);
+  } catch (err) {
+    // Tracking must never block the applicant's journey.
+    console.error("referral store failure:", err);
+  }
 
   const res = NextResponse.redirect(new URL("/apply", request.url));
   res.cookies.set("sc_ref", code, {

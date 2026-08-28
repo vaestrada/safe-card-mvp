@@ -21,11 +21,12 @@ export async function recordReferral(
 ): Promise<StoreMode> {
   const client = createClient();
   if (client) {
-    await client.from("referrals").insert({
+    const { error } = await client.from("referrals").insert({
       advocate_code: advocateCode,
       source,
       path,
     });
+    if (error) throw new Error(`referral insert failed: ${error.message}`);
     return "live";
   }
   await appendJsonl("referrals.jsonl", {
@@ -48,12 +49,13 @@ export async function recordApplication(input: {
 }): Promise<StoreMode> {
   const client = createClient();
   if (client) {
-    await client.from("applications").insert({
+    const { error } = await client.from("applications").insert({
       referral_code: input.referral_code,
       fields: input.fields,
       consent_at: input.consent_at,
       status: "submitted",
     });
+    if (error) throw new Error(`application insert failed: ${error.message}`);
     return "live";
   }
   await appendJsonl("applications.jsonl", {

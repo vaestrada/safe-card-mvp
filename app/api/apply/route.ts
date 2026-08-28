@@ -45,16 +45,25 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, errors }, { status: 400 });
   }
 
-  const mode = await recordApplication({
-    referral_code: referralCode,
-    fields: {
-      full_name: fullName,
-      mobile,
-      area,
-      role,
-    },
-    consent_at: new Date().toISOString(),
-  });
+  let mode: string;
+  try {
+    mode = await recordApplication({
+      referral_code: referralCode,
+      fields: {
+        full_name: fullName,
+        mobile,
+        area,
+        role,
+      },
+      consent_at: new Date().toISOString(),
+    });
+  } catch (err) {
+    console.error("application store failure:", err);
+    return NextResponse.json(
+      { ok: false, errors: ["May problema sa pag-imbak ng application. Subukan muli."] },
+      { status: 500 }
+    );
+  }
 
   return NextResponse.json({ ok: true, mode });
 }

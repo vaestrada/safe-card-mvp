@@ -37,3 +37,6 @@ next-env.d.ts
 
 # pilot data: submissions and referrals (synthetic or live) never get committed
 /data/
+
+# database password: never commit
+.supabase-db-password
