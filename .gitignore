@@ -40,3 +40,6 @@ next-env.d.ts
 
 # database password: never commit
 .supabase-db-password
+
+# supabase CLI local state
+supabase/.temp/
