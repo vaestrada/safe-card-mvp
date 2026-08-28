@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+<meta charset="utf-8">
+<title>Safe Card OG</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #FAF8F5;
+    display: flex;
+  }
+  .photo {
+    position: relative;
+    width: 640px;
+    height: 630px;
+    flex-shrink: 0;
+  }
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(28,26,23,0.06) 0%, rgba(28,26,23,0) 55%, #FAF8F5 100%);
+  }
+  .panel {
+    flex: 1;
+    padding: 44px 48px 40px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .eyebrow {
+    margin-top: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 2.4px;
+    color: #C8102E;
+    text-transform: uppercase;
+  }
+  .eyebrow .bar { width: 34px; height: 3px; background: #C8102E; border-radius: 2px; }
+  h1 {
+    margin-top: 14px;
+    font-size: 44px;
+    line-height: 1.14;
+    font-weight: 700;
+    color: #1C1A17;
+    letter-spacing: -0.3px;
+  }
+  .sub {
+    margin-top: 14px;
+    font-size: 19px;
+    line-height: 1.45;
+    color: #6B6459;
+  }
+  .steps {
+    margin-top: 22px;
+    display: flex;
+    gap: 10px;
+  }
+  .chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #FFFFFF;
+    border: 1px solid #E5DDD0;
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1C1A17;
+  }
+  .chip .num {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #C8102E;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #E5DDD0;
+    padding-top: 18px;
+  }
+  .prc {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .prc img { height: 42px; width: auto; opacity: 0.9; }
+  .prc .txt { font-size: 13.5px; line-height: 1.35; color: #6B6459; }
+  .prc .txt strong { color: #1C1A17; }
+  .pilot {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    color: #C8102E;
+    border: 1.5px solid #C8102E;
+    border-radius: 999px;
+    padding: 6px 14px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="photo">
+    <img src="../public/assets/og-raw.png" alt="">
+  </div>
+  <div class="panel">
+    <div>
+      <div class="brand">
+        <svg width="46" height="46" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="14" fill="#c8102e"/>
+          <rect x="26" y="14" width="12" height="36" rx="2" fill="#ffffff"/>
+          <rect x="14" y="26" width="36" height="12" rx="2" fill="#ffffff"/>
+        </svg>
+        <span style="font-size:34px; font-weight:700; color:#1C1A17; letter-spacing:-0.4px;">Safe Card</span>
+      </div>
+      <div class="eyebrow"><span class="bar"></span>Philippine Red Cross Program</div>
+      <h1>Proteksyon na<br>naiintindihan mo,<br>sa isang tap.</h1>
+      <p class="sub">Application intake para sa kasambahay,<br>driver, at caregiver na gusto nating<br>maabot.</p>
+      <div class="steps">
+        <div class="chip"><span class="num">1</span>I-scan</div>
+        <div class="chip"><span class="num">2</span>Basahin</div>
+        <div class="chip"><span class="num">3</span>Mag-apply</div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="prc">
+        <img src="../public/assets/prc-logo.png" alt="Philippine Red Cross">
+        <span class="txt"><strong>Safe Card MVP</strong><br>Pilot · VibeCodersPH</span>
+      </div>
+      <span class="pilot">Pilot</span>
+    </div>
+  </div>
+</body>
+</html>
