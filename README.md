@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Safe Card MVP — Iteration 01
 
-## Getting Started
+Digital referral and application-intake pilot for the Philippine Red Cross
+Safe Card program. Mobile-first, five-epic MVP, 5-business-day sprint.
 
-First, run the development server:
+**VibeCodersPH · Aug 2026 · Tech Lead: Viron Gil Estrada**
+
+## Stack
+
+- Next.js 16 (App Router, Turbopack) + React 19 + TypeScript
+- Tailwind CSS v4
+- Supabase (Postgres) for live mode; local JSONL for synthetic mode
+- Vercel for deployment
+
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3000
+pnpm build      # production build check
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Synthetic mode (default):** with no `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY`
+in `.env.local`, submissions and referrals append to `data/*.jsonl` locally.
+This is the pilot guardrail: no real applicant data is collected until the
+privacy/consent protocol is approved and the project-owned Supabase instance
+is provisioned.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Live mode:** fill `.env.local` from `.env.example` (service role key, server
+only), then apply the schema:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+supabase db push        # or run supabase/migrations/0001_init.sql in SQL editor
+```
 
-## Learn More
+## Epics
 
-To learn more about Next.js, take a look at the following resources:
+| Epic | Capability | Where |
+|---|---|---|
+| 1 | Landing page | `app/page.tsx` |
+| 2 | Benefit storyboard | `app/storyboard/page.tsx` |
+| 3 | Referral QR & link | `app/r/[code]/route.ts` + `app/api/qr/[code]/route.ts` |
+| 4 | Application-intake form | `components/ApplyForm.tsx` + `app/apply/page.tsx` |
+| 5 | Pilot data store | `lib/store.ts` + `app/api/apply/route.ts` + `supabase/migrations/0001_init.sql` |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Definition of Ready (before Day 1)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [ ] Signed proposal / service agreement
+- [ ] PRC-approved content: price, benefits, eligibility, application fields, wording
+- [ ] Approved privacy notice / consent language
+- [ ] Project-owned GitHub / Vercel / Supabase accounts with team invitations
+- [ ] Supabase region decision (recommend ap-southeast-1) + domain decision
+- [ ] Day 3 UAT participants and Day 5 validation users confirmed
 
-## Deploy on Vercel
+## Data privacy (RA 10173)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- RLS: deny all direct access; writes go through the server only (service role)
+- PIC/PIP roles confirmed before real data is processed
+- Consent checkpoint required before submission
+- Synthetic/test data until privacy protocol is approved
+- `data/` is git-ignored; never commit submissions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Open blockers (commercial, tracked with the BA)
+
+1. Billing entity / invoice-ability for the ₱70,000 fee
+2. Signature blocks must be blank until terms are final
+3. Define release-blocking defect severity + tranche-2 payment trigger

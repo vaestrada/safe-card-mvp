@@ -1,69 +1,97 @@
-import Image from "next/image";
+import { cookies } from "next/headers";
+import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const cookieStore = await cookies();
+  const ref = cookieStore.get("sc_ref")?.value ?? null;
+
+  const applyHref = ref ? `/apply?ref=${encodeURIComponent(ref)}` : "/apply";
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="min-h-screen">
+      <div className="dev-banner text-center text-xs px-4 py-1.5">
+        PILOT BUILD · Iteration 01 · Copy and benefits shown are sample content
+        pending PRC approval
+      </div>
+
+      {/* Hero */}
+      <section className="mx-auto max-w-2xl px-4 pt-14 pb-10 text-center">
+        <p className="text-sm font-medium tracking-wide text-safe-red uppercase">
+          Safe Card Pilot
+        </p>
+        <h1 className="mt-3 text-3xl font-bold leading-tight sm:text-4xl">
+          Proteksyon na naiintindihan mo, sa isang tap.
+        </h1>
+        <p className="mx-auto mt-4 max-w-xl text-base text-safe-muted">
+          Isang simpleng paraan para matutunan at ma-apply ang Safe Card ng
+          Philippine Red Cross, mula sa taong pinagkakatiwalaan mo.
+        </p>
+        <div className="mt-7">
+          <Link
+            href={applyHref}
+            className="inline-block rounded-lg bg-safe-red px-7 py-3 text-base font-semibold text-white shadow-sm hover:bg-safe-red-dark"
+          >
+            Mag-apply dito
+          </Link>
+          <Link
+            href="/storyboard"
+            className="ml-3 inline-block rounded-lg border border-safe-line bg-white px-7 py-3 text-base font-semibold text-safe-ink hover:bg-safe-cream"
+          >
+            Basahin ang kuwento
+          </Link>
+        </div>
+      </section>
+
+      {/* Benefits */}
+      <section className="mx-auto max-w-2xl px-4 pb-12">
+        <h2 className="text-lg font-semibold">Ano ang makukuha mo</h2>
+        <p className="mt-1 text-sm text-safe-muted">
+          Sample benefits from PRC materials. Final wording subject to PRC
+          confirmation before the pilot goes live.
+        </p>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          {[
+            ["Emergency ambulance service", "Sakaling may emergency, may sasagot."],
+            ["One unit of whole blood", "Kung kailangan mo o ng pamilya mo."],
+            ["Accident hospitalization coverage", "Tulong kapag na-ospital dahil sa aksidente."],
+            ["Dengue-related assistance", "Suporta sa panahon ng sakit."],
+          ].map(([title, desc]) => (
+            <div key={title} className="rounded-xl border border-safe-line bg-white p-4">
+              <h3 className="font-semibold text-sm">{title}</h3>
+              <p className="mt-1 text-sm text-safe-muted">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section className="border-t border-safe-line bg-white">
+        <div className="mx-auto max-w-2xl px-4 py-10">
+          <h2 className="text-lg font-semibold">Paano ito gumagana</h2>
+          <ol className="mt-4 space-y-3 text-sm">
+            <li className="flex gap-3">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-safe-red text-xs font-bold text-white">1</span>
+              <span>I-tap ang QR o link na ibinigay ng advocate na pinagkakatiwalaan mo.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-safe-red text-xs font-bold text-white">2</span>
+              <span>Basahin ang mga benepisyo sa simpleng salita.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-safe-red text-xs font-bold text-white">3</span>
+              <span>Sagutan ang maikling application form. Susunod na hakbang ay confirmation.</span>
+            </li>
+          </ol>
+          <p className="mt-6 text-xs text-safe-muted">
+            Ang submission na ito ay application intake, hindi awtomatikong
+            enrollment o coverage, hanggang kumpirmahin ng Philippine Red Cross.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+      <footer className="mx-auto max-w-2xl px-4 py-8 text-center text-xs text-safe-muted">
+        Safe Card MVP · Iteration 01 · VibeCodersPH pilot · Aug 2026
+      </footer>
+    </main>
   );
 }
