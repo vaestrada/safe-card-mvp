@@ -81,7 +81,8 @@ Pipeline flow:
 
 ```bash
 # Clone and enter directory
-cd /Users/kerwinarlan/github/safe-card-mvp
+git clone https://github.com/vaestrada/safe-card-mvp.git
+cd safe-card-mvp
 
 # Install dependencies
 pnpm install
