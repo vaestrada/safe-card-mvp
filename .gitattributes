@@ -1,0 +1,12 @@
+# Normalize line endings to LF in the repo (prevents CRLF checkout bugs on
+# cross-machine sync; see the LinkedIn parsePacket incident).
+* text=auto eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
