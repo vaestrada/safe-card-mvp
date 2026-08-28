@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
@@ -40,21 +41,29 @@ export default async function Home() {
             Basahin ang kuwento
           </Link>
         </div>
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/assets/og.png"
-          aria-label="Isang kasambahay na nakatingin sa kanyang cellphone, may pag-asa"
-          className="mx-auto mt-8 w-full max-w-2xl rounded-xl border border-safe-line shadow-sm"
-        >
-          <source src="/assets/hero.mp4" type="video/mp4" />
-          <img
-            src="/assets/og.png"
-            alt="Isang kasambahay na nakatingin sa kanyang cellphone, may pag-asa"
-          />
-        </video>
+        {/* Desktop: ambient video loop. Mobile: poster image only (data-plan friendly). */}
+        <div className="hidden sm:block">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/assets/og.jpg"
+            aria-label="Isang kasambahay na nakatingin sa kanyang cellphone, may pag-asa"
+            className="mx-auto mt-8 w-full max-w-2xl rounded-xl border border-safe-line shadow-sm"
+          >
+            <source src="/assets/hero.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <Image
+          src="/assets/og.jpg"
+          alt="Isang kasambahay na nakatingin sa kanyang cellphone, may pag-asa"
+          width={1200}
+          height={630}
+          priority
+          className="mx-auto mt-8 w-full max-w-2xl rounded-xl border border-safe-line shadow-sm sm:hidden"
+        />
       </section>
 
       {/* Benefits */}
@@ -106,7 +115,13 @@ export default async function Home() {
 
       <footer className="mx-auto max-w-2xl px-4 py-8 text-center text-xs text-safe-muted">
         <div className="mb-3 flex items-center justify-center gap-3">
-          <img src="/assets/prc-logo.png" alt="Philippine Red Cross logo" className="h-10 w-auto opacity-80" />
+          <Image
+            src="/assets/prc-logo.png"
+            alt="Philippine Red Cross logo"
+            width={121}
+            height={120}
+            className="h-10 w-auto opacity-80"
+          />
           <span className="text-left">
             Program reference: Philippine Red Cross Safe Card.
             <br />

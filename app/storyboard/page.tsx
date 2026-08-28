@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function StoryboardPage() {
@@ -24,25 +25,25 @@ export default function StoryboardPage() {
           {[
             {
               step: "Frame 1",
-              img: "/assets/story-1.png",
+              img: "/assets/story-1.webp",
               title: "May nagtiwala sa kanya",
               body: "Nasa bahay si Ate Liza, naglilinis. Inabot ng estudyanteng amo niya ang isang QR code: \"Ate, para po ito sa inyo. Safe Card ng Red Cross.\"",
             },
             {
               step: "Frame 2",
-              img: "/assets/story-2.png",
+              img: "/assets/story-2.webp",
               title: "Basahin muna, intindihin muna",
               body: "I-scan ni Ate Liza ang QR. Makikita niya ang mga benepisyo sa simpleng salita: ambulance sa emergency, dugo kung kailangan, tulong kapag na-ospital dahil sa aksidente.",
             },
             {
               step: "Frame 3",
-              img: "/assets/story-3.png",
+              img: "/assets/story-3.webp",
               title: "Dalawang minuto lang",
               body: "Sasagutan niya ang maikling form sa cellphone: pangalan, number, lugar. May privacy notice bago i-submit, kaya alam niya kung saan mapupunta ang impormasyon niya.",
             },
             {
               step: "Frame 4",
-              img: "/assets/story-4.png",
+              img: "/assets/story-4.webp",
               title: "Ang susunod na hakbang",
               body: "Tapos na ang application. Darating ang susunod na hakbang mula sa Philippine Red Cross. Hindi pa ito awtomatikong enrollment; application pa lang ito.",
             },
@@ -52,9 +53,12 @@ export default function StoryboardPage() {
                 {f.step}
               </p>
               <h2 className="mt-1 font-semibold">{f.title}</h2>
-              <img
+              <Image
                 src={f.img}
                 alt={f.title}
+                width={1408}
+                height={768}
+                sizes="(max-width: 672px) 100vw, 672px"
                 className="mt-3 h-44 w-full rounded-lg object-cover"
                 loading="lazy"
               />
