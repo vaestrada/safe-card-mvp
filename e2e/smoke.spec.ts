@@ -33,8 +33,8 @@ test.describe("Safe Card MVP smoke", () => {
     await page.getByLabel("Trabaho o papel sa tahanan").selectOption("kasambahay");
     await page.getByText(/sumasang-ayon ako sa privacy notice/).click();
     // Honeypot fill: exercises the full client->server round trip without
-    // writing a test row into the live intake store.
-    await page.locator("#website").fill("playwright-smoke");
+    // writing a test row into the live intake store. (Hidden field: force.)
+    await page.locator("#website").fill("playwright-smoke", { force: true });
     await page.getByRole("button", { name: "I-submit ang application" }).click();
     await expect(page.getByText("Natanggap ang inyong application")).toBeVisible();
   });
@@ -65,7 +65,7 @@ test.describe("Safe Card MVP smoke", () => {
   test("QR poster renders for a seeded advocate", async ({ page }) => {
     await page.goto("/qr/indy-paragas");
     await expect(page.getByText("Referral poster ni")).toBeVisible();
-    await expect(page.locator("svg")).toBeVisible();
+    await expect(page.locator('svg[shape-rendering="crispEdges"]')).toBeVisible();
     await expect(page.getByRole("button", { name: "I-print ang poster" })).toBeVisible();
   });
 });

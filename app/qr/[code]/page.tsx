@@ -35,12 +35,15 @@ export default async function QrPosterPage({
   const proto = h.get("x-forwarded-proto") ?? "http";
   const target = `${proto}://${host}/r/${encodeURIComponent(code)}?source=qr`;
 
-  const qrSvg = await QRCode.toString(target, {
+  const qrSvg = (await QRCode.toString(target, {
     type: "svg",
     errorCorrectionLevel: "M",
     margin: 1,
     color: { dark: "#1c1a17", light: "#ffffff" },
-  });
+  })).replace(
+    "<svg ",
+    '<svg width="224" height="224" style="width:100%;height:auto" '
+  );
 
   return (
     <main className="min-h-screen print:bg-white">
