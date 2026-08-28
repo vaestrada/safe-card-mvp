@@ -75,11 +75,23 @@ export default async function Home() {
         </p>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {[
-            ["Emergency ambulance service", "Sakaling may emergency, may sasagot."],
-            ["One unit of whole blood", "Kung kailangan mo o ng pamilya mo."],
-            ["Accident hospitalization coverage", "Tulong kapag na-ospital dahil sa aksidente."],
-            ["Dengue-related assistance", "Suporta sa panahon ng sakit."],
-          ].map(([title, desc]) => (
+            {
+              title: "Emergency ambulance service",
+              desc: "May sasakyan na darating at maghahatid sa iyo o sa pamilya mo papuntang ospital kapag may emergency.",
+            },
+            {
+              title: "One unit of whole blood",
+              desc: "Kapag may nangailangan ng dugo sa ospital, may nakatabi nang isang bag para sa iyo o sa mahal mo sa buhay.",
+            },
+            {
+              title: "Accident hospitalization coverage",
+              desc: "Kung ma-ospital dahil sa aksidente, may tulong na handa para hindi lahat ng gastos ay pasan mo.",
+            },
+            {
+              title: "Dengue-related assistance",
+              desc: "Kung tamaan ng dengue ang pamilya, may suportang makukuha sa panahon ng sakit.",
+            },
+          ].map(({ title, desc }) => (
             <div key={title} className="rounded-xl border border-safe-line bg-white p-4">
               <h3 className="font-semibold text-sm">{title}</h3>
               <p className="mt-1 text-sm text-safe-muted">{desc}</p>

@@ -26,6 +26,11 @@ export async function POST(request: NextRequest) {
   const area = typeof body.area === "string" ? body.area.trim() : "";
   const role = typeof body.role === "string" ? body.role : "";
   const consent = body.consent === true;
+  const whoAnswers = body.who_answers === "assisted" ? "assisted" : "self";
+  const assistantName =
+    typeof body.assistant_name === "string" && body.assistant_name.trim() !== ""
+      ? body.assistant_name.trim().slice(0, 120)
+      : null;
   const referralCode =
     typeof body.referral_code === "string" && body.referral_code.trim() !== ""
       ? body.referral_code.trim().slice(0, 64)
@@ -54,6 +59,8 @@ export async function POST(request: NextRequest) {
         mobile,
         area,
         role,
+        who_answers: whoAnswers,
+        assistant_name: assistantName,
       },
       consent_at: new Date().toISOString(),
     });

@@ -33,7 +33,7 @@ export default function StoryboardPage() {
               step: "Frame 2",
               img: "/assets/story-2.webp",
               title: "Basahin muna, intindihin muna",
-              body: "I-scan ni Ate Liza ang QR. Makikita niya ang mga benepisyo sa simpleng salita: ambulance sa emergency, dugo kung kailangan, tulong kapag na-ospital dahil sa aksidente.",
+              body: "I-scan ni Ate Liza ang QR. Sa simpleng salita, ipinaliwanag sa kanya ang ibig sabihin ng bawat tulong: ang ambulance ay sasakyang darating para maghatid sa ospital kapag emergency, at ang free blood bag ay nakalaang dugo na handa kapag may nangailangan sa ospital. Hindi jargon, hindi nakakatakot.",
             },
             {
               step: "Frame 3",

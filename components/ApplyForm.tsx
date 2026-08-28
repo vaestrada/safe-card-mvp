@@ -19,6 +19,8 @@ export default function ApplyForm({ initialRef }: { initialRef: string | null })
   const [role, setRole] = useState("");
   const [consent, setConsent] = useState(false);
   const [website, setWebsite] = useState(""); // honeypot, hidden from humans
+  const [whoAnswers, setWhoAnswers] = useState<"self" | "assisted">("self");
+  const [assistantName, setAssistantName] = useState("");
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [errors, setErrors] = useState<string[]>([]);
 
@@ -65,6 +67,8 @@ export default function ApplyForm({ initialRef }: { initialRef: string | null })
           role,
           referral_code: referralCode,
           consent: true,
+          who_answers: whoAnswers,
+          assistant_name: assistantName.trim(),
           website,
         }),
       });
@@ -182,6 +186,51 @@ export default function ApplyForm({ initialRef }: { initialRef: string | null })
           tabIndex={-1}
           autoComplete="off"
         />
+      </div>
+
+      <div className="rounded-lg border border-safe-line bg-safe-cream p-3">
+        <p className="text-sm font-medium">Sino ang sumasagot sa form na ito?</p>
+        <div className="mt-2 space-y-2 text-sm">
+          <label className="flex items-start gap-2">
+            <input
+              type="radio"
+              name="who_answers"
+              checked={whoAnswers === "self"}
+              onChange={() => setWhoAnswers("self")}
+              className="mt-0.5"
+            />
+            <span>Ako po mismo ang sumasagot.</span>
+          </label>
+          <label className="flex items-start gap-2">
+            <input
+              type="radio"
+              name="who_answers"
+              checked={whoAnswers === "assisted"}
+              onChange={() => setWhoAnswers("assisted")}
+              className="mt-0.5"
+            />
+            <span>May tumutulong sa akin (advocate, anak, o kakilala).</span>
+          </label>
+        </div>
+        {whoAnswers === "assisted" && (
+          <div className="mt-2">
+            <label htmlFor="assistant_name" className="block text-xs text-safe-muted">
+              Pangalan ng tumutulong (optional)
+            </label>
+            <input
+              id="assistant_name"
+              type="text"
+              value={assistantName}
+              onChange={(e) => setAssistantName(e.target.value)}
+              placeholder="Hal. Juan Dela Cruz"
+              className="mt-1 w-full rounded-lg border border-safe-line bg-white px-3 py-2 text-sm"
+            />
+            <p className="mt-1 text-xs text-safe-muted">
+              Kapag may tumulong, siguraduhing sumang-ayon ang aplikante bago
+              i-submit ang impormasyon niya.
+            </p>
+          </div>
+        )}
       </div>
 
       <div className="rounded-lg border border-safe-line bg-safe-cream p-3">

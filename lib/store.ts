@@ -44,7 +44,7 @@ export async function recordReferral(
  */
 export async function recordApplication(input: {
   referral_code: string | null;
-  fields: Record<string, string>;
+  fields: Record<string, string | null>;
   consent_at: string;
 }): Promise<StoreMode> {
   const client = createClient();

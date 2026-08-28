@@ -49,6 +49,26 @@ entries with `"type": "legacy"`).
 | 4 | Application-intake form | `components/ApplyForm.tsx` + `app/apply/page.tsx` |
 | 5 | Pilot data store | `lib/store.ts` + `app/api/apply/route.ts` + `supabase/migrations/0001_init.sql` |
 
+## Pilot extras
+
+- **Advocate QR poster** — printable card per advocate at `/qr/<advocate-code>`.
+- **Admin intake view** — `/admin`, password-gated (`ADMIN_PASSWORD` env).
+  Shows submissions, per-advocate funnel, and a CSV export for the PRC handoff.
+  The admin password lives in `.admin-password.txt` locally (git-ignored).
+- **Ambassador assist mode** — the form asks who is answering; assisted
+  submissions record the helper's name so PRC knows who to clarify with.
+
+## Testing (Playwright smoke suite)
+
+```bash
+pnpm test:e2e
+```
+
+Runs the smoke spec (8 scenarios: landing/OG, storyboard, referral redirect,
+valid + invalid submissions, assist mode, admin gate, QR poster) on Chromium
+desktop + Pixel 5 mobile profiles against the local dev server. The valid
+submission test fills the honeypot so no test rows enter the live store.
+
 ## Definition of Ready (before Day 1)
 
 - [ ] Signed proposal / service agreement

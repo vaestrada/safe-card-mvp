@@ -41,6 +41,13 @@ next-env.d.ts
 # database password: never commit
 .supabase-db-password
 
+# admin password: never commit
+.admin-password.txt
+
+# playwright
+/test-results/
+/playwright-report/
+
 # supabase CLI local state
 supabase/.temp/
 
