@@ -40,6 +40,11 @@ export default async function Home() {
             Basahin ang kuwento
           </Link>
         </div>
+        <img
+          src="/assets/og.png"
+          alt="Isang kasambahay na nakatingin sa kanyang cellphone, may pag-asa"
+          className="mx-auto mt-8 w-full max-w-2xl rounded-xl border border-safe-line shadow-sm"
+        />
       </section>
 
       {/* Benefits */}
@@ -90,6 +95,14 @@ export default async function Home() {
       </section>
 
       <footer className="mx-auto max-w-2xl px-4 py-8 text-center text-xs text-safe-muted">
+        <div className="mb-3 flex items-center justify-center gap-3">
+          <img src="/assets/prc-logo.png" alt="Philippine Red Cross logo" className="h-10 w-auto opacity-80" />
+          <span className="text-left">
+            Program reference: Philippine Red Cross Safe Card.
+            <br />
+            Logo shown pending formal PRC approval for this pilot.
+          </span>
+        </div>
         Safe Card MVP · Iteration 01 · VibeCodersPH pilot · Aug 2026
       </footer>
     </main>

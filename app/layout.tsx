@@ -16,6 +16,20 @@ export const metadata: Metadata = {
   title: "Safe Card Pilot | Application Intake",
   description:
     "Safe Card MVP pilot: mobile-first referral and application intake. Iteration 01.",
+  icons: [{ rel: "icon", type: "image/svg+xml", url: "/favicon.svg" }],
+  openGraph: {
+    title: "Safe Card Pilot",
+    description:
+      "Proteksyon na naiintindihan mo, sa isang tap. Safe Card application intake pilot.",
+    images: [{ url: "/assets/og.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Safe Card Pilot",
+    description:
+      "Proteksyon na naiintindihan mo, sa isang tap. Safe Card application intake pilot.",
+    images: ["/assets/og.png"],
+  },
 };
 
 export default function RootLayout({
